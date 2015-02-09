@@ -48,6 +48,13 @@ RSpec.describe Review, :type => :model do
     expect(review).not_to be_valid
   end
 
+  it "rating should be an integer" do
+    attributes = valid_attributes
+    attributes[:rating] = "five"
+    review = Review.new(attributes)
+    expect(review).not_to be_valid
+  end
+
   it "rating should be a number between 0 and 5" do
     attributes = valid_attributes
     (0..5).each do |rating|
@@ -56,6 +63,7 @@ RSpec.describe Review, :type => :model do
       expect(review).to be_valid
     end
 
+    expect(Review.new(attributes.merge(rating: -1))).not_to be_valid
     expect(Review.new(attributes.merge(rating: 6))).not_to be_valid
   end
 end
