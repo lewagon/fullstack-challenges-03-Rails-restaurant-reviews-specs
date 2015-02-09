@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Review, :type => :model do
+RSpec.describe "Review", :type => :model do
   let(:valid_attributes) do
     {
       content: "This is a great restaurant!",

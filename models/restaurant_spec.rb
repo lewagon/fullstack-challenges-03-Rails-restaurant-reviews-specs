@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Restaurant, :type => :model do
+RSpec.describe "Restaurant", :type => :model do
   let(:valid_attributes) do
     {
       name: "La Tour d'Argent",
