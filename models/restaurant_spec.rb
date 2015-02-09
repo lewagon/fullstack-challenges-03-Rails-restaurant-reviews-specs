@@ -71,4 +71,10 @@ RSpec.describe Restaurant, :type => :model do
     restaurant = Restaurant.new(valid_attributes)
     expect(restaurant).to respond_to(:reviews)
   end
+
+  it "should destroy child reviews when destroying self" do
+    restaurant = Restaurant.create!(valid_attributes)
+    3.times { restaurant.reviews.create! content: "great!", rating: 5 }
+    expect { restaurant.destroy }.to change { Review.count }.from(3).to(0)
+  end
 end
