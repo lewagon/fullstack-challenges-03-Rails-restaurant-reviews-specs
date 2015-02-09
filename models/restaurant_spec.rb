@@ -66,4 +66,9 @@ RSpec.describe Restaurant, :type => :model do
     expect(restaurant).to be_valid
     end
   end
+
+  it "has many reviews" do
+    restaurant = Restaurant.new(valid_attributes)
+    expect(restaurant).to respond_to?(:reviews)
+  end
 end
