@@ -30,7 +30,7 @@ RSpec.describe Restaurant, :type => :model do
     expect(restaurant.category).to eq("french")
   end
 
-  its "name cannot be blank" do
+  it "name cannot be blank" do
     attributes = valid_attributes
     attributes.delete(:name)
     restaurant = Restaurant.new(attributes)
