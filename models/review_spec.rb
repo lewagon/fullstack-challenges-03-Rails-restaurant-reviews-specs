@@ -30,21 +30,32 @@ RSpec.describe Review, :type => :model do
   it "content cannot be blank" do
     attributes = valid_attributes
     attributes.delete(:content)
-    restaurant = Review.new(attributes)
-    expect(restaurant).not_to be_valid
+    review = Review.new(attributes)
+    expect(review).not_to be_valid
   end
 
   it "rating cannot be blank" do
     attributes = valid_attributes
     attributes.delete(:rating)
-    restaurant = Review.new(attributes)
-    expect(restaurant).not_to be_valid
+    review = Review.new(attributes)
+    expect(review).not_to be_valid
   end
 
   it "parent restaurant cannot be nil" do
     attributes = valid_attributes
     attributes.delete(:restaurant_id)
-    restaurant = Review.new(attributes)
-    expect(restaurant).not_to be_valid
+    review = Review.new(attributes)
+    expect(review).not_to be_valid
+  end
+
+  it "rating should be a number between 0 and 5" do
+    attributes = valid_attributes
+    (0..5).each do |rating|
+      attributes[:rating] = rating
+      review = Review.new(attributes)
+      expect(review).to be_valid
+    end
+
+    expect(Review.new(attributes.merge(rating: 6))).not_to be_valid
   end
 end
