@@ -20,9 +20,6 @@ if defined?(RestaurantsController)
       { name: "" }
     end
 
-    # This should return the minimal set of values that should be in the session
-    # in order to pass any filters (e.g. authentication) defined in
-    # RestaurantsController. Be sure to keep this updated too.
     let(:valid_session) { {} }
 
     describe "GET index" do
