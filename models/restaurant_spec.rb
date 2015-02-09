@@ -51,7 +51,7 @@ RSpec.describe Restaurant, :type => :model do
     expect(restaurant).not_to be_valid
   end
 
-  it "category should belong to a fixed list of 5" do
+  it "neptunian is not a valid category" do
     attributes = valid_attributes
     attributes[:category] = "neptunian"
     restaurant = Restaurant.new(attributes)
