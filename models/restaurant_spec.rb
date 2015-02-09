@@ -57,4 +57,13 @@ RSpec.describe Restaurant, :type => :model do
     restaurant = Restaurant.new(attributes)
     expect(restaurant).not_to be_valid
   end
+
+  %w(chinese italian japanese french belgian).each do |category|
+    it "#{category} is a valid category" do
+      attributes = valid_attributes
+      attributes[:category] = category
+      restaurant = Restaurant.new(attributes)
+    expect(restaurant).to be_valid
+    end
+  end
 end
