@@ -36,4 +36,25 @@ RSpec.describe Restaurant, :type => :model do
     restaurant = Restaurant.new(attributes)
     expect(restaurant).not_to be_valid
   end
+
+  it "address cannot be blank" do
+    attributes = valid_attributes
+    attributes.delete(:address)
+    restaurant = Restaurant.new(attributes)
+    expect(restaurant).not_to be_valid
+  end
+
+  it "category cannot be blank" do
+    attributes = valid_attributes
+    attributes.delete(:category)
+    restaurant = Restaurant.new(attributes)
+    expect(restaurant).not_to be_valid
+  end
+
+  it "category should belong to a fixed list of 5" do
+    attributes = valid_attributes
+    attributes[:category] = "neptunian"
+    restaurant = Restaurant.new(attributes)
+    expect(restaurant).not_to be_valid
+  end
 end
