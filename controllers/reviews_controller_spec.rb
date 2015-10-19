@@ -52,7 +52,7 @@ if defined?(ReviewsController)
           expect(assigns(:review)).to be_persisted
         end
 
-        it "redirects to the created review" do
+        it "redirects to the parent restaurant" do
           post :create, { restaurant_id: @restaurant.id, :review => valid_attributes}, valid_session
           expect(response).to redirect_to(@restaurant)
         end
