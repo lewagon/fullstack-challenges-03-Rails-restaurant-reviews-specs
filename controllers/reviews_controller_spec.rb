@@ -32,7 +32,7 @@ if defined?(ReviewsController)
 
     describe "GET new" do
       it "assigns a new review as @review" do
-        get :new, { restaurant_id: @restaurant.id }, valid_session
+        get :new, params: { restaurant_id: @restaurant.id }, session: valid_session
         expect(assigns(:restaurant)).to eq(@restaurant)
         expect(assigns(:review)).to be_a_new(Review)
       end
@@ -42,30 +42,30 @@ if defined?(ReviewsController)
       describe "with valid params" do
         it "creates a new Review" do
           expect {
-            post :create, { restaurant_id: @restaurant.id, :review => valid_attributes}, valid_session
+            post :create, params: { restaurant_id: @restaurant.id, :review => valid_attributes}, session: valid_session
           }.to change(Review, :count).by(1)
         end
 
         it "assigns a newly created review as @review" do
-          post :create, { restaurant_id: @restaurant.id, :review => valid_attributes}, valid_session
+          post :create, params: { restaurant_id: @restaurant.id, :review => valid_attributes}, session: valid_session
           expect(assigns(:review)).to be_a(Review)
           expect(assigns(:review)).to be_persisted
         end
 
         it "redirects to the parent restaurant" do
-          post :create, { restaurant_id: @restaurant.id, :review => valid_attributes}, valid_session
+          post :create, params: { restaurant_id: @restaurant.id, :review => valid_attributes}, session: valid_session
           expect(response).to redirect_to(@restaurant)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved review as @review" do
-          post :create, { restaurant_id: @restaurant.id, :review => invalid_attributes}, valid_session
+          post :create, params: { restaurant_id: @restaurant.id, :review => invalid_attributes}, session: valid_session
           expect(assigns(:review)).to be_a_new(Review)
         end
 
         it "re-renders the 'new' template" do
-          post :create, { restaurant_id: @restaurant.id, :review => invalid_attributes}, valid_session
+          post :create, params: { restaurant_id: @restaurant.id, :review => invalid_attributes}, session: valid_session
           expect(response).to render_template("new")
         end
       end

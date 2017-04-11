@@ -25,7 +25,7 @@ if defined?(RestaurantsController)
     describe "GET index" do
       it "assigns all restaurants as @restaurants" do
         restaurant = Restaurant.create! valid_attributes
-        get :index, {}, valid_session
+        get :index, params: {}, session: valid_session
         expect(assigns(:restaurants)).to eq([restaurant])
       end
     end
@@ -33,14 +33,14 @@ if defined?(RestaurantsController)
     describe "GET show" do
       it "assigns the requested restaurant as @restaurant" do
         restaurant = Restaurant.create! valid_attributes
-        get :show, {:id => restaurant.to_param}, valid_session
+        get :show, params: {:id => restaurant.to_param}, session: valid_session
         expect(assigns(:restaurant)).to eq(restaurant)
       end
     end
 
     describe "GET new" do
       it "assigns a new restaurant as @restaurant" do
-        get :new, {}, valid_session
+        get :new, params: {}, session: valid_session
         expect(assigns(:restaurant)).to be_a_new(Restaurant)
       end
     end
@@ -49,30 +49,30 @@ if defined?(RestaurantsController)
       describe "with valid params" do
         it "creates a new Restaurant" do
           expect {
-            post :create, {:restaurant => valid_attributes}, valid_session
+            post :create, {:restaurant => valid_attributes}, session: valid_session
           }.to change(Restaurant, :count).by(1)
         end
 
         it "assigns a newly created restaurant as @restaurant" do
-          post :create, {:restaurant => valid_attributes}, valid_session
+          post :create, params: {:restaurant => valid_attributes}, session: valid_session
           expect(assigns(:restaurant)).to be_a(Restaurant)
           expect(assigns(:restaurant)).to be_persisted
         end
 
         it "redirects to the created restaurant" do
-          post :create, {:restaurant => valid_attributes}, valid_session
+          post :create, params: {:restaurant => valid_attributes}, session: valid_session
           expect(response).to redirect_to(Restaurant.last)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved restaurant as @restaurant" do
-          post :create, {:restaurant => invalid_attributes}, valid_session
+          post :create, params: {:restaurant => invalid_attributes}, session: valid_session
           expect(assigns(:restaurant)).to be_a_new(Restaurant)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:restaurant => invalid_attributes}, valid_session
+          post :create, params: {:restaurant => invalid_attributes}, session: valid_session
           expect(response).to render_template("new")
         end
       end
