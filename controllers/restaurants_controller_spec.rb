@@ -49,7 +49,7 @@ if defined?(RestaurantsController)
       describe "with valid params" do
         it "creates a new Restaurant" do
           expect {
-            post :create, {:restaurant => valid_attributes}, session: valid_session
+            post :create, params: {:restaurant => valid_attributes}, session: valid_session
           }.to change(Restaurant, :count).by(1)
         end
 
