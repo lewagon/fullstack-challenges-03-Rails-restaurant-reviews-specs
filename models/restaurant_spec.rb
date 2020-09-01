@@ -22,6 +22,7 @@ RSpec.describe "Restaurant", :type => :model do
 
   it "has a phone number" do
     restaurant = Restaurant.new(phone_number: "01 43 54 23 31")
+    expect(restaurant.phone_number).to be_a(String)
     expect(restaurant.phone_number).to eq("01 43 54 23 31")
   end
 
