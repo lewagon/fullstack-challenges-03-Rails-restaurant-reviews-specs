@@ -30,7 +30,10 @@ if defined?(ReviewsController)
 
     let(:valid_session) { {} }
 
-    describe "GET new" do
+    describe "GET new", :refactored => false do
+      it "routes to #new" do
+        expect(:get => "/restaurants/1/reviews/new").to route_to(controller: "reviews", action: "new", restaurant_id: "1")
+      end
       it "assigns a new review as @review" do
         get :new, params: { restaurant_id: @restaurant.id }, session: valid_session
         expect(assigns(:restaurant)).to eq(@restaurant)
@@ -38,7 +41,16 @@ if defined?(ReviewsController)
       end
     end
 
+    describe "GET new", :refactored => true do
+      it "doesn't route to #new anymore" do
+        expect(:get => "/restaurants/1/reviews/new").not_to be_routable
+      end
+    end
+
     describe "POST create" do
+      it "routes to #create" do
+        expect(:post => "/restaurants/1/reviews").to route_to(controller: "reviews", action: "create", restaurant_id: "1")
+      end
       describe "with valid params" do
         it "creates a new Review" do
           expect {
@@ -64,9 +76,14 @@ if defined?(ReviewsController)
           expect(assigns(:review)).to be_a_new(Review)
         end
 
-        it "re-renders the 'new' template" do
+        it "re-renders the 'new' template", :refactored => false do
           post :create, params: { restaurant_id: @restaurant.id, :review => invalid_attributes}, session: valid_session
           expect(response).to render_template("new")
+        end
+
+        it "redirects to the parent restaurant's #show", :refactored => true do
+          post :create, params: { restaurant_id: @restaurant.id, :review => invalid_attributes}, session: valid_session
+          expect(response).to render_template("show")
         end
       end
     end
